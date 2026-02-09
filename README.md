@@ -147,18 +147,32 @@ The API returns appropriate HTTP status codes:
 
 ## MongoDB Setup
 
-If you don't have MongoDB installed locally, you can:
+This project uses **MongoDB Atlas** cloud service. To set it up:
 
-1. Use MongoDB Atlas cloud service (free tier available)
-2. Install MongoDB locally
-3. Use Docker: `docker run -d -p 27017:27017 --name mongodb mongo`
+1. **Create MongoDB Atlas Account:**
+   - Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+   - Sign up for a free account
+   - Create a new cluster
+
+2. **Get Connection String:**
+   - In Atlas, go to "Database" → "Clusters"
+   - Click "Connect" on your cluster
+   - Choose "Drivers" and select Node.js
+   - Copy the connection string
+
+3. **Update `.env` file:**
+   - Paste your connection string as `MONGO_URI` value
+   - Replace `<password>` and `<username>` with your credentials
+   - Example format: `mongodb+srv://username:password@cluster.mongodb.net/database?retryWrites=true&w=majority`
 
 ## Troubleshooting
 
-**Issue**: MongoDB connection error
+**Issue**: MongoDB Atlas connection error
 
-- Ensure MongoDB is running
-- Check your `MONGO_URI` in `.env` file
+- Verify your connection string in `.env` file
+- Check that your IP address is whitelisted in MongoDB Atlas (Network Access)
+- Ensure your database username and password are correct
+- If using special characters in password, make sure they're URL-encoded
 
 **Issue**: Port already in use
 
@@ -168,6 +182,11 @@ If you don't have MongoDB installed locally, you can:
 
 - Run `npm install` to ensure all dependencies are installed
 - Ensure you're using Node.js v18 or higher
+
+**Issue**: "Authentication failed" from MongoDB
+
+- Double-check username and password in your Atlas connection string
+- Verify the database name in your connection string matches Atlas
 
 ## License
 
