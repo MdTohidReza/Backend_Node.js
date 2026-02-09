@@ -14,6 +14,10 @@ app.use(express.json());
 
 // Routes
 app.use("/api", salesRoutes);
+app.get('/', (req, res) => {
+  res.send('Sales Leaderboard Backend is live!');
+});
+
 
 // MongoDB Connection
 mongoose
